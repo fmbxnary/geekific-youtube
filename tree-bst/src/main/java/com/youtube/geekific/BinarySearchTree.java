@@ -74,17 +74,36 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
     }
 
     @Override
-    public void traverse() {
-        traverseInOrder(root);
+    public void traverse(String order) {
+        switch (order) {
+            case "inorder" -> traverseInorder(root);
+            case "preorder" -> traversePreorder(root);
+            case "postorder" -> traversePostorder(root);
+        }
     }
 
-    private void traverseInOrder(Node<T> node) {
-        if (node == null) {
-            return;
+    private void traverseInorder(Node<T> node) {
+        if (node != null) {
+            traverseInorder(node.getLeftChild());
+            System.out.println(node.getData());
+            traverseInorder(node.getRightChild());
         }
-        traverseInOrder(node.getLeftChild());
-        System.out.println(node);
-        traverseInOrder(node.getRightChild());
+    }
+
+    private void traversePreorder(Node<T> node) {
+        if (node != null) {
+            System.out.println(node.getData());
+            traversePreorder(node.getLeftChild());
+            traversePreorder(node.getRightChild());
+        }
+    }
+
+    private void traversePostorder(Node<T> node) {
+        if (node != null) {
+            traversePreorder(node.getLeftChild());
+            traversePostorder(node.getRightChild());
+            System.out.println(node.getData());
+        }
     }
 
     @Override

@@ -30,7 +30,7 @@ public interface Tree<T extends Comparable<T>> {
 
     void delete(T data);
 
-    void traverse();
+    void traverse(String order);
 
     T getMax();
 
